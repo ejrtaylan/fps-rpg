@@ -16,12 +16,16 @@ public class PlayerControllerScript : MonoBehaviour
 
     public float camXRotation = 0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        if (cam == null) cam = Camera.main; //apparently main camera is tagged
+        if (controller == null) controller = GetComponent<CharacterController>();
+        if (inputManager == null) inputManager = GetComponent<InputManager>();
+    }
+
     void Start()
     {
-        if (controller == null) controller = GetComponent<CharacterController>();
-        if (cam == null) cam = GetComponentInChildren<Camera>();
-        if (inputManager == null) inputManager = GetComponent<InputManager>();
+        
     }
 
     void Update()

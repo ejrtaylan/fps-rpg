@@ -10,6 +10,8 @@ public class InputManager : MonoBehaviour
 
     public Vector2 moveInput;
     public Vector2 mouseLookInput;
+    public bool sprintHeld { get; private set; }
+    public bool crouchToggled { get; private set; }
 
     //public bool jumpPressed = false;
     public float jumpBufferTime = 0.1f;
@@ -43,6 +45,17 @@ public class InputManager : MonoBehaviour
     {
         if (context.performed)
             jumpTimer = jumpBufferTime;
+    }
+
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        sprintHeld = context.ReadValueAsButton();
+    }
+
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            crouchToggled = !crouchToggled;
     }
 
     public void OnLook(InputAction.CallbackContext context)

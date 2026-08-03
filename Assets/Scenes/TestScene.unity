@@ -625,6 +625,7 @@ GameObject:
   - component: {fileID: 672789428}
   - component: {fileID: 672789429}
   - component: {fileID: 672789431}
+  - component: {fileID: 672789432}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -794,7 +795,19 @@ MonoBehaviour:
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 672789431}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnCrouch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument:
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
     m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
@@ -822,7 +835,19 @@ MonoBehaviour:
     m_ActionId: b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba
     m_ActionName: 'Player/Next[/Keyboard/2]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 672789431}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnSprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument:
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 641cd816-40e6-41b4-8c3d-04687c349290
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
@@ -896,13 +921,33 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23f3c5b03cebcb84bb95132191cdfb0a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerControlScript
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerControllerScript
   cam: {fileID: 330585545}
   controller: {fileID: 672789430}
   inputManager: {fileID: 672789431}
-  gravity: -9
-  speed: 5
-  jumpHeight: 1
+  capsuleCollider: {fileID: 672789422}
+  walkSpeed: 5
+  sprintSpeed: 7.5
+  crouchSpeed: 2.5
+  groundAcceleration: 20
+  groundDeceleration: 25
+  airControl: 0.25
+  gravity: -24
+  jumpHeight: 1.1
+  groundedForce: -2
+  fallGravityMultiplier: 1.35
+  coyoteTime: 0.1
+  crouchHeight: 1.2
+  crouchTransitionSpeed: 10
+  crouchCameraOffset: -0.35
+  ceilingLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  maxStamina: 100
+  staminaDrainPerSecond: 20
+  staminaRecoveryPerSecond: 15
+  staminaRecoveryDelay: 1
+  staminaResumeThreshold: 15
   camXRotation: 0
 --- !u!143 &672789430
 CharacterController:
@@ -946,6 +991,23 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   mouseLookInput: {x: 0, y: 0}
   jumpBufferTime: 0.1
+--- !u!114 &672789432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672789421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4170b3ba6d84d13a09b1e87a80e65ec, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::StaminaBarUI
+  playerController: {fileID: 672789429}
+  size: {x: 220, y: 14}
+  screenOffset: {x: 28, y: 28}
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0.65}
+  staminaColor: {r: 0.85, g: 0.85, b: 0.72, a: 1}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
